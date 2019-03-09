@@ -1,29 +1,15 @@
 <div class="wrapper">
 
     <!-- Dashboard Sidebar -->
-    <div *ngIf="currentUser" class="sidebar" data-color="danger" data-background-color="white"
+    <div class="sidebar" data-color="danger" data-background-color="white"
         data-image="./assets/img/sidebar-1.jpg">
-        <app-sidebar></app-sidebar>
+        <app-sidebar  *ngIf="currentUser" ></app-sidebar>
+        <app-messagebar  *ngIf="!currentUser"></app-messagebar>
         <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
     </div>
 
     <!-- Message Notice Sidebar -->
-    <div *ngIf="!currentUser" class="sidebar" data-color="danger" data-background-color="white"
-        data-image="./assets/img/sidebar-1.jpg">
-        <div class="logo">
-            <a class="simple-text">
-                Message Bar
-            </a>
-        </div>
-        <div class="sidebar-wrapper">
-            <ul class="nav">
-                <ol>
-                    <p>This is under development.</p>
-                </ol>
-            </ul>
-        </div>
-        <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
-    </div>
+
 
      <!-- Main Content -->
     <div class="main-panel">
