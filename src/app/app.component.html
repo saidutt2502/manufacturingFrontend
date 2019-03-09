@@ -1,15 +1,38 @@
 <div class="wrapper">
-  <div class="sidebar" data-color="danger" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
-      <app-sidebar></app-sidebar>
-      <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
-  </div>
-  <div class="main-panel">
-      <app-navbar></app-navbar>
-      <div class="main-content">
-          <router-outlet></router-outlet>
-      </div>
-      <div *ngIf="isMaps('maps')">
-          <app-footer></app-footer>
-      </div>
-  </div>
+
+    <!-- Dashboard Sidebar -->
+    <div *ngIf="currentUser" class="sidebar" data-color="danger" data-background-color="white"
+        data-image="./assets/img/sidebar-1.jpg">
+        <app-sidebar></app-sidebar>
+        <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+    </div>
+
+    <!-- Message Notice Sidebar -->
+    <div *ngIf="!currentUser" class="sidebar" data-color="danger" data-background-color="white"
+        data-image="./assets/img/sidebar-1.jpg">
+        <div class="logo">
+            <a class="simple-text">
+                Message Bar
+            </a>
+        </div>
+        <div class="sidebar-wrapper">
+            <ul class="nav">
+                <ol>
+                    <p>This is under development.</p>
+                </ol>
+            </ul>
+        </div>
+        <div class="sidebar-background" style="background-image: url(./assets/img/sidebar-4.jpg)"></div>
+    </div>
+
+     <!-- Main Content -->
+    <div class="main-panel">
+        <app-navbar *ngIf="currentUser"></app-navbar>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+        <div *ngIf="isMaps('maps')">
+            <app-footer></app-footer>
+        </div>
+    </div>
 </div>

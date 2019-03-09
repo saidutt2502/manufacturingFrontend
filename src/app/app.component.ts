@@ -5,6 +5,9 @@ import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
 
+import { AuthenticationService } from './auth/services/authentication.service';
+import { User } from './auth/users';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,8 +18,11 @@ export class AppComponent implements OnInit {
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
+  public currentUser: User;
+  constructor(public location: Location, private router: Router,private authenticationService: AuthenticationService){
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
 
-  constructor(public location: Location, private router: Router){}
   ngOnInit() {
     const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
@@ -47,12 +53,17 @@ export class AppComponent implements OnInit {
     });
     this._router = this.router.events.filter(event => event instanceof NavigationEnd).subscribe((event: NavigationEnd) => {
          elemMainPanel.scrollTop = 0;
-         elemSidebar.scrollTop = 0;
+         if(elemSidebar){
+            elemSidebar.scrollTop = 0;
+         }
     });
     if (window.matchMedia(`(min-width: 960px)`).matches && !this.isMac()) {
         let ps = new PerfectScrollbar(elemMainPanel);
-        ps = new PerfectScrollbar(elemSidebar);
+        if(elemSidebar){
+            ps = new PerfectScrollbar(elemSidebar);
+        }
     }
+   
 }
 ngAfterViewInit() {
     this.runOnRouteChange();
