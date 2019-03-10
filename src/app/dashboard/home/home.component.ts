@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HomeServiceService } from '../service/home-service.service'
 
 @Component({
   selector: 'home',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public homeapi:HomeServiceService) { }
 
   ngOnInit() {
+    console.log(localStorage.getItem('currentUser'));
+    
+    this.homeapi.userInfo().subscribe((data: {}) => {
+      console.log(data);
+    });
   }
 
 }

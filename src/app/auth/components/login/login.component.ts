@@ -13,8 +13,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class LoginComponent implements OnInit {
 
   public returnUrl: string;
+  public loginData:any = {
+    email:'',
+    password:''
+  }
 
-  constructor(private route: ActivatedRoute,private router: Router,private authenticationService: AuthenticationService,) { 
+  constructor(private route: ActivatedRoute,private router: Router,private authenticationService: AuthenticationService) { 
 
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) { 
@@ -27,7 +31,7 @@ export class LoginComponent implements OnInit {
   }
 
   public submitForm(){
-    this.authenticationService.login('asdasdasd','asdasdasd')
+    this.authenticationService.login(this.loginData)
     .pipe(first())
     .subscribe(
         data => {
@@ -37,8 +41,6 @@ export class LoginComponent implements OnInit {
           console.log(error);
           alert('error');
         });
-
-        this.router.navigate([this.returnUrl]);
   }
 
 }

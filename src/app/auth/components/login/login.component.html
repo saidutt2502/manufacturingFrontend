@@ -12,12 +12,12 @@
                     <br>
                     <p class="card-description">
                         <mat-form-field appearance="outline">
-                            <mat-label>Username</mat-label>
-                            <input matInput placeholder="Username">
+                            <mat-label>Email Address</mat-label>
+                            <input type="text" [(ngModel)]="loginData.email" matInput placeholder="Email">
                         </mat-form-field>
                         <mat-form-field appearance="outline">
                             <mat-label>Password</mat-label>
-                            <input type="password" matInput placeholder="Password">
+                            <input type="password" [(ngModel)]="loginData.password" matInput placeholder="Password">
 
                         </mat-form-field>
                     </p>

@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="card card-profile">
+              <div class="card-avatar">
+                  <a href="#pablo">
+                      <img class="img" src="./assets/img/faces/marc.jpg" />
+                  </a>
+              </div>
+              <div class="card-body">
+                  <h6 class="card-category text-gray">Register</h6>
+                  <br>
+                  <p class="card-description">
+                      <mat-form-field appearance="outline">
+                          <mat-label>Employee Id</mat-label>
+                          <input type="text" [(ngModel)]="registerData.emp_id" matInput placeholder="Employee Id">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                          <mat-label>Name</mat-label>
+                          <input type="text" [(ngModel)]="registerData.name" matInput placeholder="Name">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                          <mat-label>Email Address</mat-label>
+                          <input type="text" [(ngModel)]="registerData.email" matInput placeholder="Email">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                          <mat-label>Password</mat-label>
+                          <input type="password" [(ngModel)]="registerData.password" matInput placeholder="Password">
+                      </mat-form-field>
+                      <mat-form-field appearance="outline">
+                          <mat-label>User type Id</mat-label>
+                          <input type="text" [(ngModel)]="registerData.user_type_id" matInput placeholder="User Type Id">
+                      </mat-form-field>
+                  </p>
+                  <a routerLink="/dashboard" (click)="submitForm()" class="btn btn-success btn-flat">
+                      <mat-icon matSuffix>vpn_key</mat-icon>&nbsp;&nbsp;Login
+                  </a>
+                  <a routerLink="/dashboard" class="btn btn-danger btn-flat">
+                      <mat-icon matSuffix>vpn_key</mat-icon>&nbsp;&nbsp;Forgot Password
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

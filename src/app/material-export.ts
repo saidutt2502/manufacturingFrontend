@@ -4,7 +4,15 @@ import {  MatButtonModule,
   MatRippleModule,
   MatFormFieldModule,
   MatTooltipModule,
-  MatSelectModule,MatIconModule,  } from '@angular/material';
+  MatSelectModule,MatIconModule,
+  MatToolbarModule,
+  MatTabsModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatCardModule,
+  MatBottomSheetModule,
+  MatDialogModule
+     } from '@angular/material';
 
 const modules = [
     MatButtonModule,
@@ -13,7 +21,15 @@ const modules = [
     MatFormFieldModule,
     MatTooltipModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatToolbarModule,
+    MatTabsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatBottomSheetModule,
+    MatDialogModule
+    
 ];
 
 
