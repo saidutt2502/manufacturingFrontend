@@ -14,6 +14,7 @@ import {  MatButtonModule,
   MatCardModule,
   MatBottomSheetModule,
   MatDialogModule,
+  MatCheckboxModule 
      } from '@angular/material';
 
 const modules = [
@@ -32,7 +33,8 @@ const modules = [
     MatPaginatorModule,
     MatCardModule,
     MatBottomSheetModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCheckboxModule 
     
 ];
 

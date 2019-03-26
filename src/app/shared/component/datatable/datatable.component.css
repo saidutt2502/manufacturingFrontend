@@ -14,5 +14,4 @@ table {
 
   .mat-row:hover {
     filter: brightness(85%);
-    cursor: pointer;
   }
