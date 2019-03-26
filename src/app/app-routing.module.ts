@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
   { path: 'home', loadChildren: './dashboard/dashboard.module#DashboardModule',canActivate: [AuthGuard] },
   { path: 'stationary', loadChildren: './stationary/stationary.module#StationaryModule',canActivate: [AuthGuard] },
+  { path: 'settings', loadChildren: './settings/settings.module#SettingsModule',canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'home'},
 ];
 

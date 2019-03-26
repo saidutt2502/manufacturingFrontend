@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>More Actions</h1>
+<div mat-dialog-content>
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td *ngFor="let eachKey of data['row'] | keyvalue" class="pl-4">
+        <mat-form-field  appearance="outline">
+            <mat-label>{{eachKey.key}}</mat-label>
+          <input matInput placeholder="{{eachKey.key}}"  [name]="eachKey.key" [(ngModel)]="eachKey.value">
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="default" (click)="onNoClick()">Close</button>
+  <button mat-raised-button color="primary" (click)="updateData(myForm)" cdkFocusInitial>Update</button>
+  <button mat-raised-button color="warn" (click)="deleteData(data)"  cdkFocusInitial>Delete</button>
+</div>

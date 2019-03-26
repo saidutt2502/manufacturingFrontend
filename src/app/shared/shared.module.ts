@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialExportModule } from '../material-export';
-import { DatatableComponent } from './component/datatable/datatable.component';
+import { DatatableComponent, DialogOverviewExampleDialog } from './component/datatable/datatable.component';
 
 @NgModule({
-  declarations: [DatatableComponent],
+  declarations: [DatatableComponent,DialogOverviewExampleDialog],
   imports: [
     CommonModule,
     MaterialExportModule
@@ -12,5 +12,6 @@ import { DatatableComponent } from './component/datatable/datatable.component';
   exports : [
     DatatableComponent
   ],
+  entryComponents: [DialogOverviewExampleDialog]
 })
 export class SharedModule { }

@@ -11,7 +11,7 @@ import { User } from '../users';
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private url = "http://localhost:3000/v1";
+    private url = "http://127.0.0.1:8000/api";
 
     constructor(private http: HttpClient, private router: Router,) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
@@ -23,20 +23,20 @@ export class AuthenticationService {
     }
 
     public login(data:any) {
-        return this.http.post<any>(this.url+'/users/login',data)
+        return this.http.post<any>(this.url+'/login',data)
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
-                if (user && user.token) {
+                if (user.success) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify(user));
-                    this.currentUserSubject.next(user);
+                    localStorage.setItem('currentUser', JSON.stringify(user.success));
+                    this.currentUserSubject.next(user.success);
                 }
-                return user;
+                return user.success;
             }));
     }
 
     public register(data:any) {
-        return this.http.post<any>(this.url+'/users',data)
+        return this.http.post<any>(this.url+'/register',data)
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                     // store user details and jwt token in local storage to keep user logged in between page refreshes

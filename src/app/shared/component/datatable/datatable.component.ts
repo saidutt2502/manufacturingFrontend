@@ -1,5 +1,8 @@
-import {Component, OnInit, ViewChild , Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Inject , ViewChild , Input, Output, EventEmitter} from '@angular/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { UpdatetableService } from '../../service/updatetable.service';
 
 
 /**
@@ -20,12 +23,13 @@ export class DatatableComponent implements OnInit {
   //Data Passed from components
   @Input() rowData: any;
   @Input() colData: any;
+  @Input() tableName: string;
 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -35,6 +39,7 @@ export class DatatableComponent implements OnInit {
     
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
   }
 
   applyFilter(filterValue: string) {
@@ -44,8 +49,41 @@ export class DatatableComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+  
 
   onClick(row:any){
-    this.clickRow.emit(row);
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '70%',
+      position : {'top': '8%'},
+      data: {row:row,tableName:this.tableName}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      //console.log(result);
+    });
   } 
+}
+
+
+@Component({
+  selector: 'dataTable-modal',
+  templateUrl: 'datatable-model.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data:any, public updateTable:UpdatetableService ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  public updateData(myForm){
+    //console.log(myForm);
+    //  this.updateTable.updateTableRow(data).subscribe((data: {}) => {
+    //  });
+  }
+
+
 }

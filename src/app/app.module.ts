@@ -9,8 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialExportModule } from './material-export';
 import { LayoutsModule } from './layout/layout.module';
+import { ToastrModule } from 'ngx-toastr';
 
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,12 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     MaterialExportModule,
     FormsModule,
     HttpModule,
-    LayoutsModule
+    LayoutsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
