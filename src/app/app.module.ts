@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
@@ -24,7 +23,6 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     HttpClientModule,
     AppRoutingModule,
     MaterialExportModule,
-    FormsModule,
     HttpModule,
     LayoutsModule,
     ToastrModule.forRoot()

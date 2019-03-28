@@ -12,7 +12,7 @@ export class LocationsComponent implements OnInit {
 
   public location = new FormControl('', [Validators.required]);
 
-  public col: string[] = ['id', 'name'];
+  public col: string[] = ['name'];
   public rows:any;
 
   constructor( public settingsApi:SettingsService,public dialog: MatDialog) { }
