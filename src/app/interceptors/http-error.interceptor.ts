@@ -22,15 +22,21 @@ import {
           retry(1),
           catchError((error: HttpErrorResponse) => {
             let errorMessage = '';
+            let errorurl = '';
             if (error.error instanceof ErrorEvent) {
               // client-side error
               errorMessage = `Error: ${error.error.message}`;
             } else {
               // server-side error
-              errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+              errorMessage = 'Error '+error.status+' - '+error.error.message;
+              errorurl = error.url;
+              console.log(error);
             }
            // window.alert(errorMessage);
-            this.toasterService.error(errorMessage, "Error");
+            this.toasterService.error(errorurl ,errorMessage,{
+              tapToDismiss:true,
+              timeOut:6000
+            });
             return throwError(errorMessage);
           })
         )

@@ -5,11 +5,12 @@ import { IndexComponent } from './index/index.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LocationsComponent } from './components/locations/locations.component';
-import { DepartmentsComponent } from './components/departments/departments.component';
 import { UsersComponent } from './components/users/users.component';
+import { UsystemsComponent } from './components/usystems/usystems.component';
+import { UserlocationComponent } from './components/userlocation/userlocation.component';
 
 @NgModule({
-  declarations: [IndexComponent, LocationsComponent, DepartmentsComponent, UsersComponent],
+  declarations: [IndexComponent, LocationsComponent, UsersComponent, UsystemsComponent, UserlocationComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,

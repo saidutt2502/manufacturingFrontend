@@ -22,9 +22,4 @@ export class SettingsService {
       map(this.extractData));
   }
 
-  public addLocation(data:any):Observable<any> {
-    return this.http.post(this.url+'/settings/addLocations',data).pipe(
-      map(this.extractData));
-  }
-
 }

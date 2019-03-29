@@ -17,6 +17,16 @@ export class UpdatetableService {
 
   constructor(private http: HttpClient) { }
 
+  public readTableRow(data):Observable<any> {
+    return this.http.post(this.url+'/shared/readTableRow',data).pipe(
+      map(this.extractData));
+  }
+
+  public createTableRow(data):Observable<any> {
+    return this.http.post(this.url+'/shared/createTableRow',data).pipe(
+      map(this.extractData));
+  }
+
   public updateTableRow(data):Observable<any> {
     return this.http.post(this.url+'/shared/updateTableRow',data).pipe(
       map(this.extractData));

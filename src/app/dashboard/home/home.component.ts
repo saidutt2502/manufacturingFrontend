@@ -13,9 +13,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     console.log(localStorage.getItem('currentUser'));
     
-    this.homeapi.userInfo().subscribe((data: {}) => {
-      console.log(data);
-    });
   }
 
 }

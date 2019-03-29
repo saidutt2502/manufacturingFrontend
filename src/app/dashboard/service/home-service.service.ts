@@ -8,7 +8,6 @@ import { map, catchError, tap } from 'rxjs/operators';
 })
 export class HomeServiceService {
 
-  private url = "http://localhost:3000/v1";
 
   private extractData(res: Response) {
     let body = res;
@@ -17,9 +16,5 @@ export class HomeServiceService {
 
   constructor(private http: HttpClient) { }
 
-  public userInfo(): Observable<any> {
-    return this.http.get(this.url+'/users').pipe(
-      map(this.extractData));
-  }
 
 }
