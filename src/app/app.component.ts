@@ -14,7 +14,7 @@ import { User } from './auth/users';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'X-Unify';
+  title = 'Operations';
   private _router: Subscription;
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "X-Unify": {
+    "Operations": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -60,18 +60,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "X-Unify:build"
+            "browserTarget": "Operations:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "X-Unify:build:production"
+              "browserTarget": "Operations:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "X-Unify:build"
+            "browserTarget": "Operations:build"
           }
         },
         "test": {
@@ -115,7 +115,7 @@
         }
       }
     },
-    "X-Unify-e2e": {
+    "Operations-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -124,7 +124,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "X-Unify:serve"
+            "devServerTarget": "Operations:serve"
           }
         },
         "lint": {
@@ -139,5 +139,5 @@
       }
     }
   },
-  "defaultProject": "X-Unify"
+  "defaultProject": "Operations"
 }
