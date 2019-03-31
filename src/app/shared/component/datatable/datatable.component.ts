@@ -64,7 +64,7 @@ export class DatatableComponent implements OnInit {
      this.updateTable.createTableRow(createThis).subscribe((data: {}) => {
         this.apiData.push(data['success']);
         this.dataSource = new MatTableDataSource(this.apiData);
-       this.openSnackBar(data['success']['name'],"Inserted Successfully !!")
+       this.openSnackBar(data['success']['name'],"Inserted Successfully !!");
 
     });
      
@@ -97,7 +97,7 @@ export class DatatableComponent implements OnInit {
         this.dataSource.data[index][eachUpdatedColumn] = result[eachUpdatedColumn];
       }
       this.dataSource = new MatTableDataSource(this.dataSource.data);     
-      this.openSnackBar(result['name'],"Updated Successfully !!")
+      this.openSnackBar(result['name'],"Updated Successfully !!");
     });
   }
 
@@ -113,7 +113,7 @@ export class DatatableComponent implements OnInit {
       let index: number = this.apiData.findIndex(d => d === row);
       this.dataSource.data.splice(index, 1);
       this.dataSource = new MatTableDataSource<Element>(this.dataSource.data);
-      this.openSnackBar(row['name'],"Deleted Successfully !!")
+      this.openSnackBar(row['name'],"Deleted Successfully !!");
 
     });
 

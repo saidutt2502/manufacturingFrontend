@@ -15,7 +15,9 @@ import {  MatButtonModule,
   MatBottomSheetModule,
   MatDialogModule,
   MatCheckboxModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatExpansionModule,
+  MatAutocompleteModule
      } from '@angular/material';
 
 const modules = [
@@ -36,7 +38,9 @@ const modules = [
     MatBottomSheetModule,
     MatDialogModule,
     MatCheckboxModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatExpansionModule,
+    MatAutocompleteModule
     
 ];
 

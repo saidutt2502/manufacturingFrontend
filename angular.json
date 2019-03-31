@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rsystem": {
+    "X-Unify": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -24,6 +24,7 @@
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
               "src/assets/scss/material-dashboard.scss",
               "src/assets/css/demo.css",
+              "src/assets/css/font-awesome.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
@@ -60,18 +61,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "rsystem:build"
+            "browserTarget": "X-Unify:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "rsystem:build:production"
+              "browserTarget": "X-Unify:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "rsystem:build"
+            "browserTarget": "X-Unify:build"
           }
         },
         "test": {
@@ -115,7 +116,7 @@
         }
       }
     },
-    "rsystem-e2e": {
+    "X-Unify-e2e": {
       "root": "",
       "sourceRoot": "",
       "projectType": "application",
@@ -124,7 +125,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "rsystem:serve"
+            "devServerTarget": "X-Unify:serve"
           }
         },
         "lint": {
@@ -139,5 +140,5 @@
       }
     }
   },
-  "defaultProject": "rsystem"
+  "defaultProject": "X-Unify"
 }

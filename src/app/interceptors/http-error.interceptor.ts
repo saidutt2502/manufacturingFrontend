@@ -35,7 +35,7 @@ import {
            // window.alert(errorMessage);
             this.toasterService.error(errorurl ,errorMessage,{
               tapToDismiss:true,
-              timeOut:6000
+              disableTimeOut:true
             });
             return throwError(errorMessage);
           })

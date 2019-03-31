@@ -8,9 +8,10 @@ import { LocationsComponent } from './components/locations/locations.component';
 import { UsersComponent } from './components/users/users.component';
 import { UsystemsComponent } from './components/usystems/usystems.component';
 import { UserlocationComponent } from './components/userlocation/userlocation.component';
+import { HodlocationComponent } from './components/hodlocation/hodlocation.component';
 
 @NgModule({
-  declarations: [IndexComponent, LocationsComponent, UsersComponent, UsystemsComponent, UserlocationComponent],
+  declarations: [IndexComponent, LocationsComponent, UsersComponent, UsystemsComponent, UserlocationComponent, HodlocationComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,

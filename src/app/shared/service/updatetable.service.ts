@@ -3,12 +3,16 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
+//Importing Global variables
+import * as global from '../../global'; 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UpdatetableService {
 
-  private url = "http://127.0.0.1:8000/api";
+    //Setting API call URL from Global File
+      private url = global.apiUrl;
 
   private extractData(res: Response) {
     let body = res;

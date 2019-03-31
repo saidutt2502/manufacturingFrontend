@@ -5,13 +5,18 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../users';
 
+//Importing Global variables
+import * as global from '../../global'; 
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
-    private url = "http://127.0.0.1:8000/api";
+
+    //Setting API call URL from Global File
+    private url = global.apiUrl;
 
     constructor(private http: HttpClient, private router: Router,) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));

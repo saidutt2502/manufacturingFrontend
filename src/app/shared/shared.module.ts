@@ -4,9 +4,11 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MaterialExportModule } from '../material-export';
 import { DatatableComponent, DialogOverviewExampleDialog } from './component/datatable/datatable.component';
 import { ModifyTablePipe } from './pipes/modify-table.pipe';
+import { CheckEqualityPipe } from './pipes/check-equality.pipe';
+import { TypeaheadComponent } from './component/typeahead/typeahead.component';
 
 @NgModule({
-  declarations: [DatatableComponent,DialogOverviewExampleDialog, ModifyTablePipe],
+  declarations: [DatatableComponent,DialogOverviewExampleDialog,ModifyTablePipe, CheckEqualityPipe, TypeaheadComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -14,7 +16,9 @@ import { ModifyTablePipe } from './pipes/modify-table.pipe';
     MaterialExportModule
   ],
   exports : [
-    DatatableComponent
+    DatatableComponent,
+    TypeaheadComponent,
+    CheckEqualityPipe
   ],
   entryComponents: [DialogOverviewExampleDialog]
 })

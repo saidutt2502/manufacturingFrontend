@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="mt-3">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h4 class="card-title"><b>Head of Department -> Systems Table</b></h4>
+          </div>
+          <div class="card-body">
+              <mat-card *ngFor="let eachLocation of allLocationsKeys " class="m-2">
+                  <h3><b>{{ eachLocation }}</b></h3>
+                  <table class="example-full-width" cellspacing="0">
+                    <tr >
+                      <td *ngFor="let eachHod of allsysHod | checkEquality:'locid':allLocations[eachLocation]" class="p-4">
+                            <typeahead [data]="allUsers" setLabel="{{eachHod.sysname}}" setValue="{{eachHod.hodname}}" 
+                                        (selectedEvent)="changeHod($event,allLocations[eachLocation],eachHod.sysid,$event.name,eachLocation,eachHod.sysname)">
+                            </typeahead>
+                      </td>
+                    </tr>
+                  </table>
+              </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

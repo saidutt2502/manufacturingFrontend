@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
-
 import { SelectionModel } from '@angular/cdk/collections';
+import {MatSnackBar} from '@angular/material';
+import { SettingsService } from '../../services/settings.service';
 
 const ELEMENT_DATA = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
@@ -23,29 +24,43 @@ const ELEMENT_DATA = [
 })
 export class UserlocationComponent implements OnInit {
 
-  constructor() { }
+  constructor(public settingsApi:SettingsService,private snackBar: MatSnackBar) { }
 
-  displayedColumns = ['name','select'];
-  data = Object.assign( ELEMENT_DATA);
-  dataSource = new MatTableDataSource<Element>(this.data);
-  selection = new SelectionModel<Element>(true, []);
+  displayedColumns : any ;
+  dataSource: MatTableDataSource<any>;
+  locationIdKey:any;
+  allData:any;
+  locationsCols:any;
+  selection = new SelectionModel(true, []);
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnInit() {
+    this.settingsApi.user2location().subscribe((data: {}) => {
+      this.allData = Object.assign(data['success']);
+      this.locationIdKey = data['allLocations'];
+      this.locationsCols = Object.keys(data['allLocations']);
+      this.displayedColumns = Object.keys(this.allData[0]);
+      this.dataSource = new MatTableDataSource(this.allData);
+  });
+
   }
 
-  removeSelectedRows() {
-    this.selection.selected.forEach(item => {
-     let index: number = this.data.findIndex(d => d === item);
-     console.log(this.data.findIndex(d => d === item));
-     this.dataSource.data.splice(index,1);
-
-     this.dataSource = new MatTableDataSource<Element>(this.dataSource.data);
-   });
-   this.selection = new SelectionModel<Element>(true, []);
- }
+  changeLocation(userId,locationId,checked,username,location){
+        this.settingsApi.assignLocation2Users({'userId':userId,'locationId':locationId,'checked':checked}).subscribe((data: {}) => {
+          if(checked ==  true ){
+              this.snackBar.open(username+" <-> "+location , "Added Successfully !!", {
+                duration: 4000,
+              });
+          }else{
+            this.snackBar.open(username+" <-> "+location , "Removed Successfully !!", {
+              duration: 4000,
+            });
+          }
+         
+     });
+  }
 
 }
