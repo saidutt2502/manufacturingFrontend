@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Clone this repo using the command : git clone https://github.com/amansharma1904/ang-rsystems.git.
+Clone this repo using the command : `git clone https://github.com/amansharma1904/operationsFrontend.git`
 
 Then run `npm install` to install all the packages.
 
@@ -13,13 +13,17 @@ Configure your backend Systems url in the `globals.ts` file
 
 ## Backend Setup
 
+You will also require the xunify's DB.
+
+
+`git clone https://github.com/amansharma1904/operationsWebservices.git`
+
 `git clone `
 
 `composer install`
 
 `php artisan migrate`
-
-`php artisan passport:install`
+ 
 
 
 ## Further help
