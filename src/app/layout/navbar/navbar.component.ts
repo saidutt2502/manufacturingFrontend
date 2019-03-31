@@ -12,6 +12,8 @@ import { AuthenticationService } from '../../auth/services/authentication.servic
 })
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
+    public userName:any;
+
     location: Location;
       mobile_menu_visible: any = 0;
     private toggleButton: any;
@@ -34,6 +36,11 @@ export class NavbarComponent implements OnInit {
            this.mobile_menu_visible = 0;
          }
      });
+
+     //Setting Username Here
+     this.userName = this.authenticationService.currentUserValue;
+     this.userName = `${this.userName.name}`;
+     
     }
 
     sidebarOpen() {

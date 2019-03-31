@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule',canActivate: [AuthGuard] },
   { path: 'stationary', loadChildren: './stationary/stationary.module#StationaryModule',canActivate: [AuthGuard] },
   { path: 'settings', loadChildren: './settings/settings.module#SettingsModule',canActivate: [AuthGuard] },
+  { path: 'operations', loadChildren: './operations/operations.module#OperationsModule',canActivate: [AuthGuard] },
   { path: '**', redirectTo: 'dashboard'},
 ];
 

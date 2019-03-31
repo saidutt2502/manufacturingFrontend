@@ -17,7 +17,6 @@ import { HodlocationComponent } from './components/hodlocation/hodlocation.compo
     SettingsRoutingModule,
     SharedModule,
     MaterialExportModule
-  ],  
-  bootstrap: [IndexComponent],
+  ]
 })
 export class SettingsModule { }

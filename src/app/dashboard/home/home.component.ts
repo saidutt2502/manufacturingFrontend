@@ -11,8 +11,6 @@ export class HomeComponent implements OnInit {
   constructor(public homeapi:HomeServiceService) { }
 
   ngOnInit() {
-    console.log(localStorage.getItem('currentUser'));
-    
   }
 
 }
