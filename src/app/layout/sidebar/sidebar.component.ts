@@ -9,6 +9,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: 'dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
+    { path: 'settings', title: 'Settings',  icon: 'settings', class: '' },
 ];
 
 @Component({
@@ -29,5 +30,5 @@ export class SidebarComponent implements OnInit {
           return false;
       }
       return true;
-  };
+  }
 }

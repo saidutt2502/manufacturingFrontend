@@ -13,7 +13,7 @@ import { TypeaheadComponent } from './component/typeahead/typeahead.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialExportModule
+    MaterialExportModule,
   ],
   exports : [
     DatatableComponent,
