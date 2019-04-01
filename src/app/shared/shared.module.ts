@@ -16,6 +16,7 @@ import { TypeaheadComponent } from './component/typeahead/typeahead.component';
     MaterialExportModule,
   ],
   exports : [
+    MaterialExportModule,
     DatatableComponent,
     TypeaheadComponent,
     CheckEqualityPipe

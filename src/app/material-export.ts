@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 import {  MatButtonModule,
   MatInputModule,
@@ -17,7 +18,10 @@ import {  MatButtonModule,
   MatCheckboxModule,
   MatSnackBarModule,
   MatExpansionModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatDatepickerModule,
+  MatRadioModule,
+  MatGridListModule
      } from '@angular/material';
 
 const modules = [
@@ -40,7 +44,11 @@ const modules = [
     MatCheckboxModule,
     MatSnackBarModule,
     MatExpansionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatGridListModule,
+    NgSelectModule
     
 ];
 
