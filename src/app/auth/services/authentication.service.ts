@@ -18,6 +18,12 @@ export class AuthenticationService {
     //Setting API call URL from Global File
     private url = global.apiUrl;
 
+    private extractData(res: Response) {
+        let body = res;
+        return body || {};
+    }
+    
+
     constructor(private http: HttpClient, private router: Router,) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('opsUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -57,4 +63,9 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
         this.router.navigate(['/auth/login']);
     }
+
+  public getLocation(data):Observable<any> {
+    return this.http.post(this.url+'/noAuth/getLocation',data).pipe(
+      map(this.extractData));
+  }
 }

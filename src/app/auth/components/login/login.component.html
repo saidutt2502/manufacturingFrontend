@@ -20,6 +20,11 @@
                             <input type="password" [(ngModel)]="loginData.password" matInput placeholder="Password">
 
                         </mat-form-field>
+                        <mat-form-field>
+                            <mat-select [(ngModel)]="loginData.location" placeholder="Location">
+                              <mat-option *ngFor="let eachLocation of locations" value="eachLocation['id']">{{eachLocation['name']}}</mat-option>
+                            </mat-select>
+                          </mat-form-field>
                     </p>
                     <a routerLink="/dashboard" (click)="submitForm()" class="btn btn-success btn-flat">
                         <mat-icon matSuffix>vpn_key</mat-icon>&nbsp;&nbsp;Login

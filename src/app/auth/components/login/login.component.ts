@@ -4,6 +4,7 @@ import { first } from 'rxjs/operators';
 
 
 import { AuthenticationService } from '../../services/authentication.service';
+import { UpdatetableService } from '../../../shared/service/updatetable.service';
 
 @Component({
   selector: 'login',
@@ -15,8 +16,10 @@ export class LoginComponent implements OnInit {
   public returnUrl: string;
   public loginData:any = {
     email:'',
-    password:''
-  }
+    password:'',
+    location:''
+  };
+  public locations:any;
 
   constructor(private route: ActivatedRoute,private router: Router,private authenticationService: AuthenticationService) { 
 
@@ -28,6 +31,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+    this.authenticationService.getLocation({tablename:'locations'}).subscribe((data: {}) => {
+      this.locations = data['success'];
+    });
+
   }
 
   public submitForm(){
