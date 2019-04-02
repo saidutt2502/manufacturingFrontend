@@ -6,9 +6,10 @@ import { SharedModule } from '../shared/shared.module';
 import { DepartmentsComponent } from './component/departments/departments.component';
 import { ProductsComponent } from './component/products/products.component';
 import { LinesComponent } from './component/lines/lines.component';
+import { PermissionsComponent } from './component/permissions/permissions.component';
 
 @NgModule({
-  declarations: [IndexComponent, DepartmentsComponent, ProductsComponent, LinesComponent],
+  declarations: [IndexComponent, DepartmentsComponent, ProductsComponent, LinesComponent, PermissionsComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,

@@ -5,7 +5,7 @@
         <mat-card>
     <!-- form begins here -->
         <form [formGroup]="myForm" autocomplete="off">
-            Value: {{ myForm.value | json }}
+            <!-- Value: {{ myForm.value | json }} -->
             <hr>
         <table>
           <tbody>
@@ -21,13 +21,13 @@
             </td>
           </tr>
          
-          <tr>
+          <!-- <tr>
             <td>
               <mat-form-field class="full">
                   <input matInput placeholder="email" formControlName="email">
                 </mat-form-field>
           </td>
-        </tr>
+        </tr> -->
           <div formArrayName="phones">
             <div *ngFor="let phone of phoneForms.controls; let i=index" [formGroupName]="i">
               <tr>
