@@ -3,15 +3,15 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 
-//Importing Global variables
-import * as global from '../../global'; 
+// Importing Global variables
+import * as global from '../../global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
-  //Setting API call URL from Global File
+  // Setting API call URL from Global File
   private url = global.apiUrl;
 
   private extractData(res: Response) {
@@ -21,13 +21,8 @@ export class SettingsService {
 
   constructor(private http: HttpClient) { }
 
-  public createTableProduct(data):Observable<any> {
-    return this.http.post(this.url+'/department/createTableProduct',data).pipe(
-      map(this.extractData));
-  }
-
-  public createTableLine(data):Observable<any> {
-    return this.http.post(this.url+'/department/createTableLine',data).pipe(
+  public createTableInsert(data):Observable<any> {
+    return this.http.post(this.url+'/department/createTableInsert',data).pipe(
       map(this.extractData));
   }
 

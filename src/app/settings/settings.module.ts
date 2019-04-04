@@ -7,9 +7,10 @@ import { DepartmentsComponent } from './component/departments/departments.compon
 import { ProductsComponent } from './component/products/products.component';
 import { LinesComponent } from './component/lines/lines.component';
 import { PermissionsComponent } from './component/permissions/permissions.component';
+import { SubAssembliesComponent } from './component/sub-assemblies/sub-assemblies.component';
 
 @NgModule({
-  declarations: [IndexComponent, DepartmentsComponent, ProductsComponent, LinesComponent, PermissionsComponent],
+  declarations: [IndexComponent, DepartmentsComponent, ProductsComponent, LinesComponent, PermissionsComponent, SubAssembliesComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,

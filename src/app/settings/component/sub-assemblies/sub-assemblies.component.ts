@@ -7,11 +7,11 @@ import {MatSnackBar} from '@angular/material';
 import { MatTableDataSource } from '@angular/material';
 
 @Component({
-  selector: 'products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: 'sub-assemblies',
+  templateUrl: './sub-assemblies.component.html',
+  styleUrls: ['./sub-assemblies.component.css']
 })
-export class ProductsComponent implements OnInit {
+export class SubAssembliesComponent implements OnInit {
 
   myForm: FormGroup;
   allDepts: any;
@@ -60,10 +60,12 @@ export class ProductsComponent implements OnInit {
     this.phoneForms.removeAt(i);
   }
 
+  
+
   submitForm(){
     let createThis = {
       createData: this.myForm.value,
-      tablename: 'products'
+      tablename: 'sub_assemblies'
      };
 
     this.updateTable.createTableInsert(createThis).subscribe((data: {}) => {
@@ -78,6 +80,5 @@ export class ProductsComponent implements OnInit {
         duration: 4000,
       });
     }
-  
 
 }

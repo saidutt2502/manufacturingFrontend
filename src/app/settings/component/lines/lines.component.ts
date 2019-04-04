@@ -61,13 +61,14 @@ export class LinesComponent implements OnInit {
   }
 
   submitForm(){
-     this.updateTable.createTableLine(this.myForm.value).subscribe((data: {}) => {
-        this.apiData.push(data['success']);
-        this.dataSource = new MatTableDataSource(this.apiData);
-       this.openSnackBar(data['success']['name'],"Inserted Successfully !!");
+    let createThis = {
+      createData: this.myForm.value,
+      tablename: 'lines'
+     };
 
+    this.updateTable.createTableInsert(createThis).subscribe((data: {}) => {
+    this.openSnackBar(data['success']['name'],"Inserted Successfully !!");
     });
-     
   }
 
     //Notification bar 

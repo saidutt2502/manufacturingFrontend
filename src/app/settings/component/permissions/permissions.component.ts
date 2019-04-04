@@ -67,7 +67,7 @@ export class PermissionsComponent implements OnInit {
  });
 }
 
-changeArea() {
+changeSelect() {
   this.toggleBool = false;
   this.apiService.getUserPermissions(this.myForm.value).subscribe((data: {}) => {
     this.allData = Object.assign(data['success']);
