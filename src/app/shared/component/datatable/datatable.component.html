@@ -9,8 +9,8 @@
           <tr>
             <td *ngFor="let eachKey of colData ">
               <mat-form-field appearance="outline">
-                <mat-label>{{eachKey}}</mat-label>
-                <input matInput placeholder="{{eachKey}}" [formControlName]="eachKey">
+                <mat-label>{{eachKey | titlecase}}</mat-label>
+                <input matInput [formControlName]="eachKey">
               </mat-form-field>
             </td>
           </tr>
