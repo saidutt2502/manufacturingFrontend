@@ -65,6 +65,7 @@ export class DatatableComponent implements OnInit {
         this.apiData.push(data['success']);
         this.dataSource = new MatTableDataSource(this.apiData);
        this.openSnackBar(data['success']['name'],"Inserted Successfully !!");
+       
 
     });
      

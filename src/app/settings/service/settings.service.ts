@@ -41,4 +41,24 @@ export class SettingsService {
       map(this.extractData));
   }
 
+  public getCustomerProducts(data): Observable<any> {
+    return this.http.post(this.url + '/department/getCustomerProducts',data).pipe(
+      map(this.extractData));
+  }
+
+  public getTypeAheadDataProducts(data): Observable<any> {
+    return this.http.post(this.url + '/department/getTypeAheadDataProducts',data).pipe(
+      map(this.extractData));
+  }
+
+  public updateProductsForCustomers(data): Observable<any> {
+    return this.http.post(this.url + '/department/updateProductsForCustomers',data).pipe(
+      map(this.extractData));
+  }
+
+  public addProductsForCustomers(data): Observable<any> {
+    return this.http.post(this.url + '/department/addProductsForCustomers',data).pipe(
+      map(this.extractData));
+  }
+
 }

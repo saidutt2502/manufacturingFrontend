@@ -3,9 +3,8 @@
         <mat-label>{{setLabel}}</mat-label>
       <input matInput placeholder="{{setValue}}" aria-label="State" [matAutocomplete]="auto" [formControl]="typeAheadCtrl">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let data of filteredObj | async" [value]="data.name"  (click)="optionClicked(data)">
-          <span>{{data.name}}</span> |
-          <small>Emp ID: {{data.emp_id}}</small>
+        <mat-option *ngFor="let data of filteredObj | async" [value]="data[bindValue]"  (click)="optionClicked(data)">
+          <span>{{data[bindValue]}}</span>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>

@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Edit Values</h1>
+<div mat-dialog-content>
+    <table class="example-full-width" cellspacing="0">
+        <tr>
+            <td colspan="100%" style="text-align:center;">
+              <mat-form-field appearance="outline">
+                <mat-label>Customer Name</mat-label>
+                <input matInput autocomplete="off" [(ngModel)]="customerName">
+              </mat-form-field>
+            </td>
+          </tr>
+        <tr *ngIf="typeAheadDataProduct">
+          <td *ngFor="let eachProduct of allProducts" class="p-4">
+              <span><button (click)="deleteProduct(eachProduct)" mat-icon-button color="warn">
+                  <mat-icon>clear</mat-icon>
+              </button></span>
+                <typeahead [data]="typeAheadDataProduct" setLabel="{{data['customer']}}" setValue="{{eachProduct.name}}" bindValue="part_no"
+                            (selectedEvent)="changeProduct($event,eachProduct.id)">
+                </typeahead>
+               
+                
+
+          </td>
+        </tr>
+        <tr *ngIf="newProducts>0">
+            <td *ngFor="let item of createRange(newProducts)" class="p-4">
+                <span><button (click)="deleteArrayProduct(item)" mat-icon-button color="warn">
+                    <mat-icon>clear</mat-icon>
+                </button></span>
+                  <typeahead [data]="typeAheadDataProduct" setLabel="{{data['customer']}}" setValue="" bindValue="part_no"
+                  (selectedEvent)="addProduct($event)">
+                  </typeahead>                  
+            </td>
+          </tr>
+        <td colspan="100%" style="text-align:center;">
+            <span>
+              <button  mat-raised-button color="primary" (click)="addNewProducts()">
+                <mat-icon matSuffix>publish</mat-icon>&nbsp;&nbsp;Insert Products
+              </button>
+            </span>
+          </td>
+      </table>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="default" (click)="onNoClick()">Close</button>
+  <button mat-raised-button color="primary" (click)="updateData()" [mat-dialog-close]="customerName" cdkFocusInitial>Update</button>
+</div>

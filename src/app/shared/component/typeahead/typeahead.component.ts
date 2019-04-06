@@ -16,6 +16,7 @@ export class TypeaheadComponent implements OnInit {
   @Input() data: any;
   @Input() setValue: any;
   @Input() setLabel: any;
+  @Input() bindValue: any;
   @Output() selectedEvent = new EventEmitter<object>();
 
   constructor() { 
@@ -32,19 +33,18 @@ export class TypeaheadComponent implements OnInit {
       //this.typeAheadCtrl = this.setValue;
       this.typeAheadCtrl.setValue(this.setValue);
     }
+
+    if(this.bindValue == '' || this.bindValue == null){
+      //this.typeAheadCtrl = this.setValue;
+      this.bindValue='name';
+    }
+
   }
 
   private _filterData(value: string) {
     const filterValue = value.toLowerCase();
-    return this.data.filter(obj => obj.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.data.filter(obj => obj[this.bindValue].toLowerCase().indexOf(filterValue) === 0);
   }
-
-  // formControlValueChanged() {
-  //     this.typeAheadCtrl.valueChanges.subscribe(
-  //       (value: any) => {
-  //           this.selectedEvent.emit(value);
-  //       });  
-  // }
 
   optionClicked(obj){
     this.selectedEvent.emit(obj);

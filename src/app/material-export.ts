@@ -21,7 +21,8 @@ import {  MatButtonModule,
   MatAutocompleteModule,
   MatDatepickerModule,
   MatRadioModule,
-  MatGridListModule
+  MatGridListModule,
+  MatStepperModule
      } from '@angular/material';
 
 const modules = [
@@ -48,7 +49,8 @@ const modules = [
     MatDatepickerModule,
     MatRadioModule,
     MatGridListModule,
-    NgSelectModule
+    NgSelectModule,
+    MatStepperModule
     
 ];
 

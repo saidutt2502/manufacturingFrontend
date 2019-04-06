@@ -4,17 +4,18 @@ import { IndexComponent } from './index/index.component';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { DepartmentsComponent } from './component/departments/departments.component';
-import { ProductsComponent } from './component/products/products.component';
 import { LinesComponent } from './component/lines/lines.component';
 import { PermissionsComponent } from './component/permissions/permissions.component';
 import { SubAssembliesComponent } from './component/sub-assemblies/sub-assemblies.component';
+import { CustomersComponent,DialogOverviewExampleDialog } from './component/customers/customers.component';
 
 @NgModule({
-  declarations: [IndexComponent, DepartmentsComponent, ProductsComponent, LinesComponent, PermissionsComponent, SubAssembliesComponent],
+  declarations: [IndexComponent, DepartmentsComponent, LinesComponent, PermissionsComponent, SubAssembliesComponent, CustomersComponent,DialogOverviewExampleDialog],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     SharedModule,
-  ]
+  ],
+  entryComponents: [DialogOverviewExampleDialog]
 })
 export class SettingsModule { }
