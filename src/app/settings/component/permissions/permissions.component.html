@@ -20,7 +20,7 @@
                   </ng-select>
                 </form>  
                 <mat-form-field>
-                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" [disabled]="toggleBool">
+                  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" [attr.disabled]="toggleBool">
                 </mat-form-field>
   
                 <mat-table  [dataSource]="dataSource">
@@ -54,7 +54,7 @@
                   </mat-row>
                 </mat-table>
   
-                <mat-paginator #paginator [pageSize]="3" [pageSizeOptions]="[5, 10, 20]"  [disabled]="toggleBool">
+                <mat-paginator #paginator [pageSize]="3" [pageSizeOptions]="[5, 10, 20]"  [attr.disabled]="toggleBool">
                 </mat-paginator>
               </mat-card>
             </div>
