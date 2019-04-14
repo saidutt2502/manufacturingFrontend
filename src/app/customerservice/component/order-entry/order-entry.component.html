@@ -1,0 +1,88 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Order Entry Form</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="orderForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ng-select [items]="allDepts"
+                                        bindLabel="name"
+                                        bindValue="code"
+                                        placeholder="Department"
+                                        formControlName="department"
+                                        (change)="departmentChange()">
+                                    </ng-select>                                 
+                                </div>
+                                <div class="col-md-6">
+                                    <ng-select [items]="allCustomers"
+                                        bindLabel="customer"
+                                        bindValue="id"
+                                        placeholder="Customer"
+                                        formControlName="customer"
+                                        (change)="customerChange()">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-radio-group formControlName="selected_option" (change)="assignSelected()">
+                                        <mat-radio-button value="1">New Order</mat-radio-button>&nbsp;
+                                        <mat-radio-button value="2">Edit Order</mat-radio-button>&nbsp;
+                                        <mat-radio-button value="3">View Order</mat-radio-button>
+                                    </mat-radio-group>  
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="selected_variable=='1'">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Date" disabled value="{{curDate}}">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="selected_variable=='1'">
+                                <div class="col-md-6">
+                                  <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="PO Number" formControlName="po_number" autocomplete="off">
+                                  </mat-form-field>
+                                  <div id="po_check" *ngIf="po_check==true">PO Already Exists</div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="selected_variable=='2'|| selected_variable=='3'">
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Date" disabled>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="selected_variable=='2'|| selected_variable=='3'">
+                                <div class="col-md-6">
+                                    <ng-select [items]="allPos"
+                                            bindLabel="po_number"
+                                            bindValue="po_number"
+                                            placeholder="PO Number"
+                                            formControlName="po_number">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <hr>    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button mat-raised-button type="button" class="btn btn-primary" (click)="orderClick()" [disabled]="!orderForm.valid">Proceed</button>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</div>
+  

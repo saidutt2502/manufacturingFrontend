@@ -14,7 +14,7 @@
               <span><button (click)="deleteProduct(eachProduct)" mat-icon-button color="warn">
                   <mat-icon>clear</mat-icon>
               </button></span>
-                <typeahead [data]="typeAheadDataProduct" setLabel="{{data['customer']}}" setValue="{{eachProduct.name}}" bindValue="part_no"
+                <typeahead [data]="typeAheadDataProduct" setLabel="{{data['customer']}}" setValue="{{eachProduct.name}}" bindValue="item_code"
                             (selectedEvent)="changeProduct($event,eachProduct.id)">
                 </typeahead>
                
@@ -27,7 +27,7 @@
                 <span><button (click)="deleteArrayProduct(item)" mat-icon-button color="warn">
                     <mat-icon>clear</mat-icon>
                 </button></span>
-                  <typeahead [data]="typeAheadDataProduct" setLabel="{{data['customer']}}" setValue="" bindValue="part_no"
+                  <typeahead [data]="typeAheadDataProduct" setLabel="{{data['customer']}}" setValue="" bindValue="item_code"
                   (selectedEvent)="addProduct($event)">
                   </typeahead>                  
             </td>

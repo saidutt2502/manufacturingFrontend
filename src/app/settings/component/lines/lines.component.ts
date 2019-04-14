@@ -15,6 +15,7 @@ export class LinesComponent implements OnInit {
 
   myForm: FormGroup;
   allDepts: any;
+  allLines: any;
   public apiData: any;
 
   dataSource: MatTableDataSource<any>;
@@ -25,17 +26,10 @@ export class LinesComponent implements OnInit {
   ngOnInit() {
 
     this.myForm = this.fb.group({
-      // email: ['', [
-      //   Validators.required, Validators.email
-      // ]],
-      department: ['', [
+      department: [[
         Validators.required
       ]],
-      phones: this.fb.array([
-        this.fb.group({
-          areanumber: []
-        })
-      ])
+      lines: this.fb.array([])
     });
 
     this.tableApi.readTableRow({tablename: 'departments'}).subscribe((data: {}) => {
@@ -44,20 +38,22 @@ export class LinesComponent implements OnInit {
     });
   }
 
-  get phoneForms() {
-    return this.myForm.get('phones') as FormArray;
+  get lineForms() {
+    return this.myForm.get('lines') as FormArray;
   }
 
-  addArea() {
-    const phone = this.fb.group({
-      areanumber: []
+  addLine() {
+    const line = this.fb.group({
+      line_name: ['', [
+        Validators.required
+      ]]
     })
   
-    this.phoneForms.push(phone);
+    this.lineForms.push(line);
   }
   
-  deleteArea(i) {
-    this.phoneForms.removeAt(i);
+  deleteLine(i) {
+    this.lineForms.removeAt(i);
   }
 
   submitForm(){
@@ -67,7 +63,33 @@ export class LinesComponent implements OnInit {
      };
 
     this.updateTable.createTableInsert(createThis).subscribe((data: {}) => {
-    this.openSnackBar(data['success']['name'],"Inserted Successfully !!");
+    this.openSnackBar("Lines Inserted Successfully","Close");
+    });
+  }
+
+  changeDepartment(){
+
+    while (this.lineForms.length !== 0) {
+      this.lineForms.removeAt(0)
+    }
+
+    let createThis = {
+      createData: this.myForm.value,
+      tablename: 'lines'
+     };
+
+    this.tableApi.readTableRow(createThis).subscribe((data: {}) => {
+      this.allLines = data['success'];
+      for(var each_line of this.allLines)
+      {
+          const line_variable = this.fb.group({
+            line_name: [each_line['name'], [
+              Validators.required
+            ]]
+          })
+        
+          this.lineForms.push(line_variable);
+        }
     });
   }
 
