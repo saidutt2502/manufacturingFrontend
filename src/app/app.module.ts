@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { MaterialExportModule } from './material-export';
 import { LayoutsModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
+import {MatNativeDateModule} from '@angular/material';
 
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
@@ -25,6 +26,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     MaterialExportModule,
     HttpModule,
     LayoutsModule,
+    MatNativeDateModule,
     ToastrModule.forRoot()
   ],
   providers: [

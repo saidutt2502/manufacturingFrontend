@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartmentsComponent implements OnInit {
 
-  public col: string[] = ['name', 'code'];
+  public col: any = {name:'Name', code:'Product Code'};
   constructor() { }
 
   ngOnInit() {

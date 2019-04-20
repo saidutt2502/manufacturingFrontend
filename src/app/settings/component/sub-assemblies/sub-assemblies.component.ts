@@ -15,6 +15,8 @@ export class SubAssembliesComponent implements OnInit {
 
   myForm: FormGroup;
   allDepts: any;
+  allAssemblies: any;
+  assembly_check: any;
   public apiData: any;
 
   dataSource: MatTableDataSource<any>;
@@ -25,17 +27,10 @@ export class SubAssembliesComponent implements OnInit {
   ngOnInit() {
 
     this.myForm = this.fb.group({
-      // email: ['', [
-      //   Validators.required, Validators.email
-      // ]],
-      department: ['', [
+      department: [,[
         Validators.required
       ]],
-      phones: this.fb.array([
-        this.fb.group({
-          areanumber: []
-        })
-      ])
+      assemblies: this.fb.array([])
     });
 
     this.tableApi.readTableRow({tablename: 'departments'}).subscribe((data: {}) => {
@@ -44,34 +39,85 @@ export class SubAssembliesComponent implements OnInit {
     });
   }
 
-  get phoneForms() {
-    return this.myForm.get('phones') as FormArray;
+  get assemblyForms() {
+    return this.myForm.get('assemblies') as FormArray;
   }
 
-  addArea() {
-    const phone = this.fb.group({
-      areanumber: []
+  addAssembly() {
+    this.assembly_check=false;
+    const assembly = this.fb.group({
+      assembly_name: ['', [
+        Validators.required
+      ]]
     })
   
-    this.phoneForms.push(phone);
+    this.assemblyForms.push(assembly);
   }
   
-  deleteArea(i) {
-    this.phoneForms.removeAt(i);
+  deleteAssembly(i) {
+    this.assemblyForms.removeAt(i);
   }
-
-  
 
   submitForm(){
     let createThis = {
       createData: this.myForm.value,
-      tablename: 'sub_assemblies'
+      tablename: 'subassemblies'
      };
 
     this.updateTable.createTableInsert(createThis).subscribe((data: {}) => {
-    this.openSnackBar(data['success']['name'],"Inserted Successfully !!");
-
+      if(data['success']=='undefined')
+      {
+        this.assembly_check=true;
+      }
+      else if(data['success']=='last_entry_delete')
+      {
+        this.myForm.reset();
+        this.openSnackBar("Sub Assemblies Edited Successfully","Close");
+      }
+      else
+      {
+        this.myForm.reset();
+        while (this.assemblyForms.length !== 0) {
+        this.assemblyForms.removeAt(0)
+        }
+        this.openSnackBar("Sub Assemblies Inserted Successfully","Close");
+      }
     });
+  }
+
+  changeDepartment(){
+
+    this.assembly_check=false;
+
+    while (this.assemblyForms.length !== 0) {
+      this.assemblyForms.removeAt(0)
+    }
+
+    let createThis = {
+      createData: this.myForm.value,
+      tablename: 'subassemblies'
+     };
+
+    this.tableApi.readTableRow(createThis).subscribe((data: {}) => {
+      this.allAssemblies = data['success'];
+      for(var each_assembly of this.allAssemblies)
+      {
+          const assembly_variable = this.fb.group({
+            assembly_name: [each_assembly['name'], [
+              Validators.required
+            ]]
+          })
+        
+          this.assemblyForms.push(assembly_variable);
+        }
+    });
+  }
+
+  resetForm(){
+    this.myForm.reset();
+    while (this.assemblyForms.length !== 0) {
+      this.assemblyForms.removeAt(0)
+    }
   }
 
     //Notification bar 

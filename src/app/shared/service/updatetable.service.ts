@@ -40,4 +40,9 @@ export class UpdatetableService {
     return this.http.post(this.url+'/shared/deleteTableRow',data).pipe(
       map(this.extractData));
   }
+
+  public checkTableRow(data):Observable<any> {
+    return this.http.post(this.url+'/shared/checkTableRow',data).pipe(
+      map(this.extractData));
+  }
 }

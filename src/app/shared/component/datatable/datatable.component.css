@@ -13,8 +13,11 @@ td, th {
 
 .mat-row:hover {
   filter: brightness(85%);
+  cursor: pointer;
 }
 
 .mat-input-small {
   max-width: 200px;
 }
+
+#code_check{color:red};

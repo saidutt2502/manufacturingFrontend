@@ -6,7 +6,6 @@
                 <div class="card">
                     <div class="card-header card-header-primary">
                         <h4 class="card-title">Lines</h4>
-                        <p class="card-category">Enter line names in each department</p>
                     </div>
                     <div class="card-body">
                         <form [formGroup]="myForm" autocomplete="off">
@@ -23,7 +22,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                              <div class="col-md-12">
+                              <div class="col-md-6">
+                                <div style="color: red;" *ngIf="line_check==true">Enter A Line For The Selected Department</div>
+                              </div>
+                              <div class="col-md-6">
                                 <button mat-icon-button type="button" class="btn btn-primary pull-right" (click)="addLine()"><mat-icon>add</mat-icon></button>
                               </div>
                             </div>
@@ -37,8 +39,7 @@
                                   </div>
                                   <div class="col-md-2">
                                       <span>
-                                          <!-- <button (click)="deleteLine(i)" *ngIf="i!=0" mat-icon-button color="warn"> -->
-                                        <button (click)="deleteLine(i)" mat-icon-button color="warn">
+                                        <button (click)="deleteLine(i)"  mat-icon-button color="warn">
                                           <mat-icon>clear</mat-icon>
                                         </button>
                                       </span>
@@ -47,8 +48,13 @@
                               </div>
                             </div>
                             <hr>
-                            <button mat-raised-button type="submit" class="btn btn-success pull-right" (click)="submitForm()" [disabled]="!myForm.valid">Submit</button>
-                            <div class="clearfix"></div>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <button mat-raised-button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="!myForm.valid">Insert</button>
+                                <button mat-raised-button type="button" class="btn btn-primary" (click)="resetForm()">Reset</button>
+                                <div class="clearfix"></div>
+                              </div>
+                            </div>
                         </form>
                     </div>
                 </div>

@@ -16,6 +16,7 @@ export class LinesComponent implements OnInit {
   myForm: FormGroup;
   allDepts: any;
   allLines: any;
+  line_check: any;
   public apiData: any;
 
   dataSource: MatTableDataSource<any>;
@@ -26,7 +27,7 @@ export class LinesComponent implements OnInit {
   ngOnInit() {
 
     this.myForm = this.fb.group({
-      department: [[
+      department: [,[
         Validators.required
       ]],
       lines: this.fb.array([])
@@ -43,6 +44,7 @@ export class LinesComponent implements OnInit {
   }
 
   addLine() {
+    this.line_check=false;
     const line = this.fb.group({
       line_name: ['', [
         Validators.required
@@ -63,11 +65,29 @@ export class LinesComponent implements OnInit {
      };
 
     this.updateTable.createTableInsert(createThis).subscribe((data: {}) => {
-    this.openSnackBar("Lines Inserted Successfully","Close");
+      if(data['success']=='undefined')
+      {
+        this.line_check=true;
+      }
+      else if(data['success']=='last_entry_delete')
+      {
+        this.myForm.reset();
+        this.openSnackBar("Lines Edited Successfully","Close");
+      }
+      else
+      {
+        this.myForm.reset();
+        while (this.lineForms.length !== 0) {
+        this.lineForms.removeAt(0)
+        }
+        this.openSnackBar("Lines Inserted Successfully","Close");
+      }
     });
   }
 
   changeDepartment(){
+
+    this.line_check=false;
 
     while (this.lineForms.length !== 0) {
       this.lineForms.removeAt(0)
@@ -91,6 +111,13 @@ export class LinesComponent implements OnInit {
           this.lineForms.push(line_variable);
         }
     });
+  }
+
+  resetForm(){
+    this.myForm.reset();
+    while (this.lineForms.length !== 0) {
+      this.lineForms.removeAt(0)
+    }
   }
 
     //Notification bar 

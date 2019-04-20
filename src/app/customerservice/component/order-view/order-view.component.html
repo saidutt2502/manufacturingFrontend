@@ -1,0 +1,128 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">View Orders Form</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="view_orderForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ng-select [items]="allDepts"
+                                        bindLabel="name"
+                                        bindValue="code"
+                                        placeholder="Department"
+                                        formControlName="department"
+                                        (change)="departmentChange()">
+                                    </ng-select>                                 
+                                </div>
+                                <div class="col-md-6">
+                                    <ng-select [items]="allCustomers"
+                                        bindLabel="customer"
+                                        bindValue="id"
+                                        placeholder="Customer"
+                                        formControlName="customer"
+                                        (change)="customerChange()">
+                                    </ng-select>
+                                </div>
+                            </div>
+                            <!-- <div class="row">
+                              <div class="col-md-6">
+                                  <mat-form-field>
+                                      <input matInput [matDatepicker]="picker1" placeholder="From" formControlName="from_date" autocomplete="off">
+                                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                              </div>   
+                              <div class="col-md-6">
+                                  <mat-form-field>
+                                      <input matInput [matDatepicker]="picker2" placeholder="To" formControlName="to_date" autocomplete="off">
+                                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                      <mat-datepicker #picker2></mat-datepicker>
+                                    </mat-form-field>
+                              </div>
+                            </div> -->
+                            <div class="row">
+                              <div class="col-md-12">
+                                <button mat-raised-button type="button" class="btn btn-primary" (click)="resetForm()" >&nbsp;&nbsp;&nbsp;Reset&nbsp;&nbsp;&nbsp;</button>
+                                <div class="clearfix"></div>
+                              </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                      <span>
+                          <button (click)="refreshTable()" matTooltip="Refresh" mat-icon-button >
+                            <mat-icon>autorenew</mat-icon>
+                          </button>
+                        </span>
+                    <!-- <button mat-raised-button type="button" class="btn btn-primary" (click)="refreshTable()" >Refresh</button>
+                    <div class="clearfix"></div> -->
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <mat-form-field>
+                      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="mat-elevation-z8">
+                      <table mat-table [dataSource]="dataSource" matSort> 
+                        <ng-container matColumnDef="punching_date">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Punching Date </th>
+                          <td mat-cell *matCellDef="let row" matTooltip="View" (click)="onClickSelect()">{{row.punching_date}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="po_number">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> PO Number </th>
+                         <td mat-cell *matCellDef="let row" matTooltip="View" (click)="onClickSelect()">{{row.po_number}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="status">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Status</th>
+                          <td mat-cell *matCellDef="let row" matTooltip="View" (click)="onClickSelect()">{{row.status}}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                          <th mat-header-cell *matHeaderCellDef> Action </th>
+                          <td mat-cell *matCellDef="let row">
+                            <span>
+                              <button (click)="onClickCancel(row)" *ngIf="row.status=='Active'" matTooltip="Delete" mat-icon-button color="warn">
+                                <mat-icon>clear</mat-icon>
+                              </button>
+                            </span>
+                            <span>
+                              <button *ngIf="row.status=='Cancelled'" mat-icon-button color="warn" disabled>
+                                <mat-icon>clear</mat-icon>
+                              </button>
+                            </span>   
+                          </td>
+                        </ng-container>
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+        </div>
+    </div>
+</div>
+  

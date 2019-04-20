@@ -4,7 +4,7 @@
                 <div class="col-md-11"></div>
                 <div class="col-md-1">
                     <span>
-                        <button mat-icon-button color="basic" (click)="cancel()">
+                        <button mat-icon-button matDialogClose color="basic" (click)="closeDialog()">
                             <mat-icon>clear</mat-icon>
                         </button>
                     </span>
@@ -39,7 +39,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-6">
+                                            <div style="color: red;" *ngIf="order_check==true">Enter An Order For The Selected Item Code</div>
+                                    </div>
+                                    <div class="col-md-6">
                                             <button mat-icon-button type="button" class="btn btn-primary pull-right" (click)="addOrder_new()"><mat-icon>add</mat-icon></button>
                                     </div>
                                 </div>
@@ -64,9 +67,9 @@
                                             <div class="col-md-2">
                                                 <mat-form-field class="example-full-width">
                                                     <mat-select formControlName="priority" placeholder="Priority">
-                                                        <mat-option value="option1">P1</mat-option>
-                                                        <mat-option value="option2">P2</mat-option>
-                                                        <mat-option value="option3">P3</mat-option>
+                                                        <mat-option value="P1">P1</mat-option>
+                                                        <mat-option value="P2">P2</mat-option>
+                                                        <mat-option value="P3">P3</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                             </div>
@@ -94,7 +97,7 @@
                             <h4 class="card-title">Edit Order</h4>
                         </div>
                         <div class="card-body">
-                            <form [formGroup]="entryForm" autocomplete="off">
+                            <form [formGroup]="entryForm_edit" autocomplete="off">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <ng-select [items]="allProducts"
@@ -103,7 +106,7 @@
                                                 bindValue="id"
                                                 placeholder="Item Code"
                                                 formControlName="item_code"
-                                                (change)="changeProduct()">
+                                                (change)="changeProduct_edit()">
                                         </ng-select>
                                     </div>
                                 </div>
@@ -115,12 +118,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <button mat-icon-button type="button" class="btn btn-primary pull-right" (click)="addOrder()"><mat-icon>add</mat-icon></button>
+                                    <div class="col-md-6">
+                                        <div style="color: red;" *ngIf="order_check==true">Enter An Order For The Selected Item Code</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button mat-icon-button type="button" class="btn btn-primary pull-right" (click)="addOrder_edit()"><mat-icon>add</mat-icon></button>
                                     </div>
                                 </div>
                                 <div formArrayName="location_orders">
-                                    <div *ngFor="let location_order of location_orderForms.controls; let i=index" [formGroupName]="i">
+                                    <div *ngFor="let location_order of location_orderForms_edit.controls; let i=index" [formGroupName]="i">
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <mat-form-field class="example-full-width">
@@ -140,15 +146,15 @@
                                             <div class="col-md-2">
                                                 <mat-form-field class="example-full-width">
                                                     <mat-select formControlName="priority" placeholder="Priority">
-                                                        <mat-option value="option1">P1</mat-option>
-                                                        <mat-option value="option2">P2</mat-option>
-                                                        <mat-option value="option3">P3</mat-option>
+                                                        <mat-option value="P1">P1</mat-option>
+                                                        <mat-option value="P2">P2</mat-option>
+                                                        <mat-option value="P3">P3</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                             </div>
                                             <div class="col-md-2">
                                                 <span>
-                                                    <button (click)="deleteOrder(i)" mat-icon-button color="warn">
+                                                    <button (click)="deleteOrder_edit(i)" mat-icon-button color="warn">
                                                         <mat-icon>clear</mat-icon>
                                                     </button>
                                                 </span>
@@ -157,7 +163,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <button mat-raised-button type="button" class="btn btn-danger pull-right" (click)="submitForm()" [disabled]="!entryForm.valid">Confirm</button>
+                                <button mat-raised-button type="button" class="btn btn-success pull-right" (click)="submitForm_edit()" [disabled]="!entryForm_edit.valid">Confirm</button>
                                 <div class="clearfix"></div>
                             </form>
                         </div>

@@ -30,4 +30,9 @@ export class CustomerserviceService {
     map(this.extractData));
 }
 
+ public deleteTableValue(data): Observable<any> {
+  return this.http.post(this.url + '/customerservice/deleteTableValue',data).pipe(
+    map(this.extractData));
+}
+
 }

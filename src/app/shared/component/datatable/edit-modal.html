@@ -1,0 +1,44 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-11"></div>
+            <div class="col-md-1">
+                <span>
+                    <button mat-icon-button matDialogClose color="basic">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Edit {{object_name}}</h4>
+                    </div>
+                    <div class="card-body">
+                            <form [formGroup]="form"  autocomplete="off">
+                              <div class="row">
+                                <div class="col" *ngFor="let key of objectKeys(data['col'])">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="{{data['col'][key]}}" [formControlName]="key" autocomplete="off">
+                                  </mat-form-field>
+                                  <!-- Only for Departments -->
+                                  <div style="color: red;" id="code_check" *ngIf="code_check==true && key=='code'">Product Code Already Exists</div>  
+                                </div>
+                              </div>
+                              <hr>    
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <button mat-raised-button type="button" class="btn btn-success pull-right" (click)="confirmEdit()" [disabled]="!form.valid" [mat-dialog-close]="form.value">Confirm</button>
+                                  <div class="clearfix"></div>
+                                </div>
+                              </div>
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            
