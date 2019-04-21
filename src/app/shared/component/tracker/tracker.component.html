@@ -1,0 +1,111 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h4 class="card-title">Tracker Form</h4>
+                  </div>
+                  <div class="card-body">
+                      <form [formGroup]="trackerForm">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <ng-select [items]="allDepts"
+                                      bindLabel="name"
+                                      bindValue="code"
+                                      placeholder="Department"
+                                      formControlName="department"
+                                      (change)="departmentChange()">
+                                  </ng-select>                                 
+                              </div>
+                              <div class="col-md-6">
+                                  <ng-select [items]="allCustomers"
+                                      bindLabel="customer"
+                                      bindValue="id"
+                                      placeholder="Customer"
+                                      formControlName="customer"
+                                      (change)="customerChange()">
+                                  </ng-select>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <ng-select [items]="allPos"
+                                          bindLabel="po_number"
+                                          bindValue="po_number"
+                                          placeholder="PO Number"
+                                          formControlName="po_number"
+                                          (change)="poNumberChange()">
+                                  </ng-select>
+                              </div>
+                              <div class="col-md-6">
+                                  <ng-select [items]="allItemCode"
+                                          bindLabel="item_code"
+                                          bindValue="id"
+                                          placeholder="Item Code"
+                                          formControlName="item_code">
+                                  </ng-select>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-md-6">
+                                <mat-form-field>
+                                  <input matInput [matDatepicker]="dp" placeholder="Month and Year" [formControl]="date">
+                                  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                                  <mat-datepicker #dp
+                                                  startView="multi-year"
+                                                  (yearSelected)="chosenYearHandler($event)"
+                                                  (monthSelected)="chosenMonthHandler($event, dp)"
+                                                  panelClass="example-month-picker">
+                                  </mat-datepicker>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <hr>    
+                          <div class="row">
+                              <div class="col-md-12">
+                                  <button mat-raised-button type="button" class="btn btn-primary" (click)="getTrackerData()" [disabled]="!trackerForm.valid">Proceed</button>
+                                  <button mat-raised-button type="button" class="btn btn-primary" (click)="resetForm()" >&nbsp;&nbsp;Reset&nbsp;&nbsp;</button>
+                                  <div class="clearfix"></div>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          <div class="col-md-1"></div>
+      </div>
+      
+      <div class="row" *ngIf="trackerApiData">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12">
+                  <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" autocomplete="off">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="mat-elevation-z8 sticky-table-container">
+                      <table mat-table [dataSource]="dataSource">
+                        
+                          <ng-container [matColumnDef]="key" *ngFor="let key of displayedColumns">
+                            <th mat-header-cell *matHeaderCellDef> {{displayedColumns[key]}} </th>
+                            <td mat-cell *matCellDef="let row" (click)="onClickEdit(row)"> {{row[key] }} </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

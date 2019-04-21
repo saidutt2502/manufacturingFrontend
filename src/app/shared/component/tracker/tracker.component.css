@@ -1,0 +1,15 @@
+.sticky-table-container {
+    overflow: auto;
+    max-width: 100%;
+  }
+  
+  table {
+    width: 100%;
+    border-spacing: 0 8px !important;
+  }
+    
+  td.mat-cell,th.mat-cell,th.mat-header-cell {
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+   }
+

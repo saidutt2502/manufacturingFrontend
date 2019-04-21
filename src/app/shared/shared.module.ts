@@ -6,9 +6,11 @@ import { DatatableComponent, EditModal, DeleteModal } from './component/datatabl
 import { ModifyTablePipe } from './pipes/modify-table.pipe';
 import { CheckEqualityPipe } from './pipes/check-equality.pipe';
 import { TypeaheadComponent } from './component/typeahead/typeahead.component';
+import { TrackerComponent } from './component/tracker/tracker.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [DatatableComponent, EditModal, ModifyTablePipe, CheckEqualityPipe, TypeaheadComponent, DeleteModal],
+  declarations: [DatatableComponent, EditModal, ModifyTablePipe, CheckEqualityPipe, TypeaheadComponent, DeleteModal, TrackerComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,8 +21,10 @@ import { TypeaheadComponent } from './component/typeahead/typeahead.component';
     MaterialExportModule,
     DatatableComponent,
     TypeaheadComponent,
+    TrackerComponent,
     CheckEqualityPipe
   ],
-  entryComponents: [EditModal,DeleteModal]
+  entryComponents: [EditModal,DeleteModal],
+  providers:[DatePipe]
 })
 export class SharedModule { }
