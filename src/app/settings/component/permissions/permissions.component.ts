@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import { SelectionModel } from '@angular/cdk/collections';
 import {MatSnackBar} from '@angular/material';
 import { UpdatetableService } from '../../../shared/service/updatetable.service';
@@ -13,7 +13,10 @@ import { SettingsService } from '../../service/settings.service'
 })
 export class PermissionsComponent implements OnInit {
 
-  displayedColumns: any ;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  columnsToDisplay: any ;
   dataSource: MatTableDataSource<any>;
   permissionIdKey: any;
   allData: any;
@@ -28,25 +31,28 @@ export class PermissionsComponent implements OnInit {
   , private fb: FormBuilder) { }
 
   ngOnInit() {
+
+    this.tableApi.readTableRow({tablename: 'departments'}).subscribe((data: {}) => {
+      this.allDepts = data['success'];
+    });
+
+    this.myForm = this.fb.group({
+      department: [,[
+        Validators.required
+      ]],
+    });
     this.apiService.getUserwithoutPermissions().subscribe((data: {}) => {
       this.allData = Object.assign(data['success']);
       this.permissionIdKey = data['allPermission'];
       this.permissionCols = Object.keys(data['allPermission']);
-      this.displayedColumns = Object.keys(this.allData[0]);
+      this.columnsToDisplay = Object.keys(this.allData[0]);
       this.dataSource = new MatTableDataSource(this.allData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
   });
 
 
-    this.tableApi.readTableRow({tablename: 'departments'}).subscribe((data: {}) => {
-      this.allDepts = data['success'];
-      console.log(data['success']);
-    });
-
-    this.myForm = this.fb.group({
-      department: ['', [
-        Validators.required
-      ]],
-    });
+    
 
   }
 
@@ -55,11 +61,11 @@ export class PermissionsComponent implements OnInit {
     this.apiService.assignPermission2Users({'departmentId':this.myForm.value['department'],'userId':userId,
     'permissionId':permissionId,'checked':checked}).subscribe((data: {}) => {
       if(checked ==  true ){
-          this.snackBar.open(username+" <-> "+permission , "Added Successfully !!", {
+          this.snackBar.open("Permission Assigned Successfully" , "Close", {
             duration: 4000,
           });
       }else{
-        this.snackBar.open(username+" <-> "+permission , "Removed Successfully !!", {
+        this.snackBar.open(" Permission Dismissed Successfully", "Close", {
           duration: 4000,
         });
       }
@@ -73,8 +79,10 @@ changeSelect() {
     this.allData = Object.assign(data['success']);
     this.permissionIdKey = data['allPermission'];
     this.permissionCols = Object.keys(data['allPermission']);
-    this.displayedColumns = Object.keys(this.allData[0]);
+    this.columnsToDisplay = Object.keys(this.allData[0]);
     this.dataSource = new MatTableDataSource(this.allData);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 });
 }
 

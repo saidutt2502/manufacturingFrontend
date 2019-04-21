@@ -8,73 +8,69 @@
                         <h4 class="card-title">{{tableName | titlecase }}</h4>
                     </div>
                     <div class="card-body">
-                      <mat-card>
-                        <form [formGroup]="insertForm"  autocomplete="off">
-                          <div class="row">
-                            <div class="col" *ngFor="let key of objectKeys(colData)">
-                              <mat-form-field class="example-full-width">
-                                <input matInput placeholder="{{colData[key]}}" [formControlName]="key" autocomplete="off">
-                              </mat-form-field>
+                      <form [formGroup]="insertForm"  autocomplete="off">
+                        <div class="row">
+                          <div class="col" *ngFor="let key of objectKeys(colData)">
+                            <mat-form-field class="example-full-width">
+                              <input matInput placeholder="{{colData[key]}}" [formControlName]="key" autocomplete="off">
+                            </mat-form-field>
                               <!-- Only for Departments -->
-                              <div id="code_check" *ngIf="code_check==true && key=='code'">Product Code Already Exists</div>  
-                            </div>
+                            <div id="code_check" *ngIf="code_check==true && key=='code'">Product Code Already Exists</div>  
                           </div>
-                          <hr>    
-                          <div class="row">
-                            <div class="col-md-12">
-                              <button mat-raised-button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="!insertForm.valid">Insert</button>
-                              <button mat-raised-button type="button" class="btn btn-primary" (click)="resetForm()" >Reset</button>
-                              <div class="clearfix"></div>
-                            </div>
+                        </div>
+                        <hr>    
+                        <div class="row">
+                          <div class="col-md-12">
+                            <button mat-raised-button type="button" class="btn btn-success" (click)="submitForm()" [disabled]="!insertForm.valid">Insert</button>
+                            <button mat-raised-button type="button" class="btn btn-primary" (click)="resetForm()" >Reset</button>
+                            <div class="clearfix"></div>
                           </div>
-                        </form>
-                      </mat-card>  
+                        </div>
+                      </form>
                     </div>
                 </div>
             </div>
             <div class="col-md-1"></div>
         </div>
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-body">
-                      <mat-card>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <mat-form-field>
-                              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" autocomplete="off">
-                            </mat-form-field>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <div class="mat-elevation-z8">
-                              <table mat-table [dataSource]="dataSource">
-                                <ng-container [matColumnDef]="key" *ngFor="let key of objectKeys(colData)">
-                                  <th mat-header-cell *matHeaderCellDef> {{colData[key]}} </th>
-                                  <td mat-cell *matCellDef="let row" matTooltip="Edit" (click)="onClickEdit(row)"> {{row[key] }} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="actionColumn">
-                                  <th mat-header-cell *matHeaderCellDef> Action </th>
-                                  <td mat-cell *matCellDef="let row">
-                                   <span>
-                                    <button (click)="onClickDelete(row)" matTooltip="Delete" mat-icon-button color="warn">
-                                      <mat-icon>clear</mat-icon>
-                                    </button>
-                                   </span>
-                                  </td>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-                                <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-                              </table>
-                              <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-                            </div>
-                          </div>
-                        </div>
-                      </mat-card>   
+          <div class="col-md-1"></div>
+          <div class="col-md-10">
+            <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" autocomplete="off">
+                      </mat-form-field>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSource">
+                          <ng-container [matColumnDef]="key" *ngFor="let key of objectKeys(colData)">
+                            <th mat-header-cell *matHeaderCellDef> {{colData[key]}} </th>
+                            <td mat-cell *matCellDef="let row" matTooltip="Edit" (click)="onClickEdit(row)"> {{row[key] }} </td>
+                          </ng-container>
+                          <ng-container matColumnDef="actionColumn">
+                            <th mat-header-cell *matHeaderCellDef> Action </th>
+                            <td mat-cell *matCellDef="let row">
+                            <span>
+                              <button (click)="onClickDelete(row)" matTooltip="Delete" mat-icon-button color="warn">
+                                <mat-icon>clear</mat-icon>
+                              </button>
+                            </span>
+                            </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                          <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                      </div>
+                    </div>
+                  </div> 
                 </div>
+              </div>
             </div>
             <div class="col-md-1"></div>
         </div>

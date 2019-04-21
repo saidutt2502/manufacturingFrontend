@@ -114,6 +114,7 @@ export class LinesComponent implements OnInit {
   }
 
   resetForm(){
+    this.line_check=false;
     this.myForm.reset();
     while (this.lineForms.length !== 0) {
       this.lineForms.removeAt(0)

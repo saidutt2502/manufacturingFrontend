@@ -58,6 +58,7 @@ export class SubAssembliesComponent implements OnInit {
     this.assemblyForms.removeAt(i);
   }
 
+  //Insert
   submitForm(){
     let createThis = {
       createData: this.myForm.value,
@@ -115,6 +116,7 @@ export class SubAssembliesComponent implements OnInit {
 
   resetForm(){
     this.myForm.reset();
+    this.assembly_check=false;
     while (this.assemblyForms.length !== 0) {
       this.assemblyForms.removeAt(0)
     }
