@@ -31,11 +31,6 @@ export class SettingsService {
       map(this.extractData));
   }
 
-  public getUserwithoutPermissions(): Observable<any> {
-    return this.http.get(this.url + '/department/userwithoutpermission').pipe(
-      map(this.extractData));
-  }
-
   public assignPermission2Users(data): Observable<any> {
     return this.http.post(this.url + '/department/assignPermission2Users',data).pipe(
       map(this.extractData));

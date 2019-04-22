@@ -40,7 +40,7 @@ export class OrderEntryComponent implements OnInit {
       customer: [,[
         Validators.required
       ]],
-      selected_option: ['', [
+      selected_option: [, [
         Validators.required
       ]],
       po_number: [,[
@@ -466,7 +466,7 @@ export class OrderModal implements OnInit {
     });
   }
   
-  //COMMAN FUNCTIONS
+
 
   //Notification bar 
   openSnackBar(message: string, action: string) {

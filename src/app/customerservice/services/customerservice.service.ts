@@ -25,14 +25,20 @@ export class CustomerserviceService {
    return this.http.post(this.url + '/customerservice/createTableInsert',data).pipe(
      map(this.extractData));
  }
+
+ public editTableValue(data): Observable<any> {
+  return this.http.post(this.url + '/customerservice/editTableValue',data).pipe(
+    map(this.extractData));
+}
+
  public existsTableValue(data): Observable<any> {
   return this.http.post(this.url + '/customerservice/existsTableValue',data).pipe(
     map(this.extractData));
-}
+ }
 
  public deleteTableValue(data): Observable<any> {
   return this.http.post(this.url + '/customerservice/deleteTableValue',data).pipe(
     map(this.extractData));
-}
+ }
 
 }

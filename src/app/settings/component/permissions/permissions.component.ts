@@ -41,7 +41,7 @@ export class PermissionsComponent implements OnInit {
         Validators.required
       ]],
     });
-    this.apiService.getUserwithoutPermissions().subscribe((data: {}) => {
+    this.apiService.getUserPermissions(this.myForm.value).subscribe((data: {}) => {
       this.allData = Object.assign(data['success']);
       this.permissionIdKey = data['allPermission'];
       this.permissionCols = Object.keys(data['allPermission']);
@@ -57,8 +57,8 @@ export class PermissionsComponent implements OnInit {
   }
 
 
-  changePermission(userId,permissionId,checked,username,permission){
-    this.apiService.assignPermission2Users({'departmentId':this.myForm.value['department'],'userId':userId,
+  changePermission(empId,permissionId,checked,username,permission){
+    this.apiService.assignPermission2Users({'departmentId':this.myForm.value['department'],'empId':empId,
     'permissionId':permissionId,'checked':checked}).subscribe((data: {}) => {
       if(checked ==  true ){
           this.snackBar.open("Permission Assigned Successfully" , "Close", {
@@ -73,9 +73,10 @@ export class PermissionsComponent implements OnInit {
  });
 }
 
-changeSelect() {
-  this.toggleBool = false;
-  this.apiService.getUserPermissions(this.myForm.value).subscribe((data: {}) => {
+changeDepartment() {
+
+    this.toggleBool = false;
+    this.apiService.getUserPermissions(this.myForm.value).subscribe((data: {}) => {
     this.allData = Object.assign(data['success']);
     this.permissionIdKey = data['allPermission'];
     this.permissionCols = Object.keys(data['allPermission']);
@@ -83,7 +84,19 @@ changeSelect() {
     this.dataSource = new MatTableDataSource(this.allData);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    if(this.myForm.value['department']==null)
+    {
+      this.toggleBool=true;
+    }
 });
+}
+
+applyFilter(filterValue: string) {
+  this.dataSource.filter = filterValue.trim().toLowerCase();
+
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
 }
 
 }
