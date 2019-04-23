@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl,Validators  } from '@ang
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import {MatSnackBar} from '@angular/material';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {map, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -141,7 +142,7 @@ constructor(private tableApi: UpdatetableService,private currenttableApi: Custom
   onClickAdd(row: any) {
     const dialogRef = this.dialog.open(CustomerInformationModal, {
       width: '70%',
-      data: { info_entry_data: row, id: row.id }
+      data: { info_entry_data: row, id: row.id, department:this.customerForm.value['department'] }
     });
   }
 }
@@ -213,40 +214,117 @@ export class CustomerInformationModal implements OnInit {
 
   public detailsForm: FormGroup;
   selected_variable:any;
-
+  allProducts:any;
+  allProducts_get:any;
+  allLocations:any;
+  product_check:Boolean = false;
+  location_check:Boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<CustomerInformationModal>,
-    @Inject(MAT_DIALOG_DATA) public data: any, private currenttableApi: CustomerserviceService, private fb: FormBuilder) {dialogRef.disableClose = true;}
+    @Inject(MAT_DIALOG_DATA) public data: any, private currenttableApi: CustomerserviceService, private fb: FormBuilder, private tableApi: UpdatetableService, private snackBar: MatSnackBar) {dialogRef.disableClose = true;}
 
   name=this.data['info_entry_data']['customer'];
  
  
   ngOnInit() {
 
+    let createThis = {
+      department: this.data['department'],
+      tablename: 'products'
+     };
+
+    this.tableApi.readTableRow(createThis).subscribe((data: {}) => {
+      this.allProducts = data['success'];
+    
+     });
+
     this.detailsForm = this.fb.group({
       selected_option: [, [
         Validators.required
       ]],
-      products: this.fb.array([])
+      products: this.fb.array([]),
+      locations: this.fb.array([])
     });
   }
 
+
   optionSelected(){
     this.selected_variable = this.detailsForm.value['selected_option'];
+
+    if(this.selected_variable==1)
+    {
+      this.product_check=false;
+
+      while (this.productForms.length !== 0) {
+        this.productForms.removeAt(0)
+      }
+
+      let createThis = {
+        customer_id: this.data['id'],
+        tablename: 'customer_products'
+       };
+  
+      this.tableApi.readTableRow(createThis).subscribe((data: {}) => {
+        this.allProducts_get = data['success'];
+        for(var each_line of this.allProducts_get)
+        {
+            const product_variable = this.fb.group({
+              product_name: [each_line['item_code'], [
+                Validators.required
+              ]],
+            })
+
+            this.productForms.push(product_variable);
+          }
+         
+      });
+    }
+    else if(this.selected_variable==2)
+    {
+      this.location_check=false;
+
+    
+
+      while (this.locationForms.length !== 0) {
+        this.locationForms.removeAt(0)
+      }
+  
+      
+  
+      let createThis1 = {
+        customer_id: this.data['id'],
+        tablename: 'customer_delivery_locations'
+       };
+  
+      this.tableApi.readTableRow(createThis1).subscribe((data: {}) => {
+        this.allLocations = data['success'];
+        for(var each_location of this.allLocations)
+        {
+            const location_variable = this.fb.group({
+              location_name: [each_location['delivery_location'], [
+                Validators.required
+              ]]
+            })
+          
+            this.locationForms.push(location_variable);
+          }
+      });
+    }
+
   }
 
+  //Products
+
   get productForms() {
-    return this.productForms.get('products') as FormArray;
+    return this.detailsForm.get('products') as FormArray;
   }
 
   addProduct() {
-
     const product = this.fb.group({
-      product_name: ['', [
+      product_name: [, [
         Validators.required
-      ]],
-      
+      ]]
     })
   
     this.productForms.push(product);
@@ -255,6 +333,93 @@ export class CustomerInformationModal implements OnInit {
   deleteProduct(i) {
     this.productForms.removeAt(i);
   }
+
+  submitForm_product(){
+    let createThis = {
+      createData: this.detailsForm.value,
+      customer_id: this.data['id'],
+      tablename: 'products'
+     };
+
+    this.currenttableApi.createTableInsert(createThis).subscribe((data: {}) => {
+      // if(data['success']=='undefined')
+      // {
+      //   this.product_check=true;
+      // }
+      // else if(data['success']=='last_entry_delete')
+      // {
+      //   this.detailsForm.reset();
+      //   this.openSnackBar("Products Dismissed Successfully","Close");
+      // }
+      // else
+      // {
+        this.detailsForm.reset();
+        while (this.productForms.length !== 0) {
+        this.productForms.removeAt(0)
+        }
+        this.openSnackBar("Products Assigned Successfully","Close");
+      // }
+    });
+  }
+
+  //Delivery Locations
+
+  get locationForms() {
+    return this.detailsForm.get('locations') as FormArray;
+  }
+
+  addLocation() {
+    this.location_check=false;
+    const location = this.fb.group({
+      location_name: ['', [
+        Validators.required
+      ]]
+    })
+  
+    this.locationForms.push(location);
+  }
+  
+  deleteLocation(i) {
+    this.locationForms.removeAt(i);
+  }
+
+  submitForm_location(){
+    let createThis = {
+      createData: this.detailsForm.value,
+      customer_id: this.data['id'],
+      tablename: 'delivery_locations'
+     };
+
+    this.currenttableApi.createTableInsert(createThis).subscribe((data: {}) => {
+      if(data['success']=='undefined')
+      {
+        this.location_check=true;
+      }
+      else if(data['success']=='last_entry_delete')
+      {
+        this.detailsForm.reset();
+        this.openSnackBar("Delivery Locations Edited Successfully","Close");
+      }
+      else
+      {
+        this.detailsForm.reset();
+        while (this.locationForms.length !== 0) {
+        this.locationForms.removeAt(0)
+        }
+        this.openSnackBar("Delivery Locations Inserted Successfully","Close");
+      }
+    });
+  }
+
+
+
+   //Notification bar 
+   openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 4000,
+    });
+  }
+
 }
 
 
