@@ -1,12 +1,13 @@
 import { Component, OnInit,ViewChild,Inject } from '@angular/core';
 import { UpdatetableService } from '../../../shared/service/updatetable.service';
+import { TrackerService } from '../../../shared/service/tracker.service';
 import { CustomerserviceService } from '../../../customerservice/services/customerservice.service';
 import { FormBuilder, FormGroup, FormArray, FormControl,Validators  } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MatDatepicker} from '@angular/material/datepicker';
+import {MatSnackBar} from '@angular/material';
 
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
@@ -42,19 +43,14 @@ export const MY_FORMATS = {
 })
 export class TrackerComponent implements OnInit {
 
-  constructor(private tableApi: UpdatetableService,private currenttableApi: CustomerserviceService, private fb: FormBuilder,private datePipe : DatePipe) {}
+  constructor(private trackerApi:TrackerService ,private tableApi: UpdatetableService,private currenttableApi: CustomerserviceService, private fb: FormBuilder,private datePipe : DatePipe, private snackBar: MatSnackBar) {}
   allDepts: any;
   allCustomers: any;
   allPos: any;
   allItemCode:any;
   trackerForm: FormGroup;
-
-  dataSource: MatTableDataSource<any>;
   trackerApiData:any;
-
-  displayedColumns =
-  ["delivery_location","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"];
-
+  trackerColumnsApiData:any;
 
   date = new FormControl(moment());
 
@@ -148,12 +144,24 @@ export class TrackerComponent implements OnInit {
     let trackerData = {
       createData: this.trackerForm.value,
       date:this.datePipe.transform(this.date.value, 'MM-yyyy'),
-      tablename: 'tracker'
      };
 
-     this.tableApi.createTableRow(trackerData).subscribe((data: {}) => {
+     this.trackerApi.getDateColumnsTracker({date:this.datePipe.transform(this.date.value, 'MM-yyyy')}).subscribe((data: {}) => {
+      this.trackerColumnsApiData = data;
+    });
+
+     this.trackerApi.createGetTracker(trackerData).subscribe((data: {}) => {
       this.trackerApiData = data['success'];
-      this.dataSource = new MatTableDataSource(this.trackerApiData);
+    });
+
+
+  }
+
+  updateTrackerDateValues(event,id){
+    this.trackerApi.editTrackerValues({id:id,value:event.target.value}).subscribe((data: {}) => {
+      if(data['success']){
+        this.openSnackBar("Tracker Updated Successfully","Close"); 
+      }
     });
 
   }
@@ -162,6 +170,12 @@ export class TrackerComponent implements OnInit {
   resetForm(){
     this.trackerForm.reset();
     this.allPos = null;
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 4000,
+    });
   }
 
 }

@@ -1,15 +1,67 @@
 .sticky-table-container {
-    overflow: auto;
-    max-width: 100%;
-  }
-  
-  table {
-    width: 100%;
-    border-spacing: 0 8px !important;
-  }
-    
-  td.mat-cell,th.mat-cell,th.mat-header-cell {
-    padding: 16px;
-    border: 2px solid #e0e0e0;
-   }
+  overflow: auto;
+  max-width: 100%;
+}
 
+table {
+  width: 100%;
+  border-spacing: 0 8px !important;
+}
+
+.frac {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  letter-spacing: 0.001em;
+  text-align: center;
+}
+
+.frac>span {
+  display: block;
+  padding: 0.1em;
+}
+
+.frac span.bottom {
+  border-top: thin solid black;
+}
+
+.frac span.symbol {
+  display: none;
+}
+
+
+.actual-input-value{
+  width:100px !important;
+  border-bottom: none;
+}
+
+table {
+  position: relative;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: 0.25em;
+}
+
+thead th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  top: 0;
+  background: #FFF;
+}
+
+thead th:first-child {
+  left: 0;
+  z-index: 1;
+}
+
+
+tbody th {
+  position: -webkit-sticky; /* for Safari */
+  position: sticky;
+  left: 0;
+  background: #FFF;
+  z-index: 1;
+  border-right: 1px solid #CCC;
+}

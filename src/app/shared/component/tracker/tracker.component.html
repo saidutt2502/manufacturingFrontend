@@ -83,23 +83,35 @@
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-                  <mat-form-field>
-                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search" autocomplete="off">
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
                   <div class="mat-elevation-z8 sticky-table-container">
-                      <table mat-table [dataSource]="dataSource">
-                        
-                          <ng-container [matColumnDef]="key" *ngFor="let key of displayedColumns">
-                            <th mat-header-cell *matHeaderCellDef> {{displayedColumns[key]}} </th>
-                            <td mat-cell *matCellDef="let row" (click)="onClickEdit(row)"> {{row[key] }} </td>
-                          </ng-container>
-                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                        </table>
+                    <table class="table table-hover table-bordered">
+                      <thead>
+                        <tr>
+                          <th scope="col"></th>
+                          <th scope="col"></th>
+                          <th scope="col" *ngFor="let eachDate of trackerColumnsApiData"> {{ eachDate }}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let eachLocation of trackerApiData ">
+                          <th  scope="row">{{ eachLocation['location'] }}</th>
+                          <td>
+                            <div class="frac">
+                              <span>Planned</span>
+                              <span class="symbol">/</span>
+                              <span class="bottom">Actual</span>
+                            </div>
+                          </td>
+                          <td *ngFor="let eachDate of eachLocation | keyvalue "> 
+                              <div class="frac">
+                                  <span> <input  class="actual-input-value" (blur)="updateTrackerDateValues($event,eachDate.value.id)" value="{{eachDate.value.planned}}"></span>
+                                  <span class="symbol">/</span>
+                                  <span class="bottom">{{ eachDate.value.actual }}</span>
+                                </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
