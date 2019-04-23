@@ -32,7 +32,7 @@ table {
 
 .actual-input-value{
   width:100px !important;
-  border-bottom: none;
+  border: none;
 }
 
 table {
@@ -64,4 +64,8 @@ tbody th {
   background: #FFF;
   z-index: 1;
   border-right: 1px solid #CCC;
+}
+
+.sunday{
+  background: yellow;
 }

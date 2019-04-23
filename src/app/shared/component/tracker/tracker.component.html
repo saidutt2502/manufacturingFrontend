@@ -87,7 +87,7 @@
                     <table class="table table-hover table-bordered">
                       <thead>
                         <tr>
-                          <th scope="col"></th>
+                          <th scope="col">Location</th>
                           <th scope="col"></th>
                           <th scope="col" *ngFor="let eachDate of trackerColumnsApiData"> {{ eachDate }}</th>
                         </tr>
@@ -102,9 +102,9 @@
                               <span class="bottom">Actual</span>
                             </div>
                           </td>
-                          <td *ngFor="let eachDate of eachLocation | keyvalue "> 
+                          <td *ngFor="let eachDate of eachLocation | keyvalue " [ngClass]="{'sunday': eachDate.value.is_sunday =='1'}"> 
                               <div class="frac">
-                                  <span> <input  class="actual-input-value" (blur)="updateTrackerDateValues($event,eachDate.value.id)" value="{{eachDate.value.planned}}"></span>
+                                  <span> <input  class="actual-input-value" [ngClass]="{'sunday': eachDate.value.is_sunday =='1'}" (change)="updateTrackerDateValues($event,eachDate.value.id)" value="{{eachDate.value.planned}}"></span>
                                   <span class="symbol">/</span>
                                   <span class="bottom">{{ eachDate.value.actual }}</span>
                                 </div>
