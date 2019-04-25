@@ -11,7 +11,16 @@
     <!-- Message Notice Sidebar -->
 
 
-     <!-- Main Content -->
+    <ng-http-loader 
+        [backdrop]="true"
+        [backgroundColor]="'#333'"
+        [debounceDelay]="100"
+        [extraDuration]="0"
+        [minDuration]="10"
+        [opacity]=".6"
+        spinner="sk-wave">
+    </ng-http-loader>
+<!-- Main Content -->
     <div class="main-panel">
         <app-navbar *ngIf="currentUser"></app-navbar>
         <div class="main-content">

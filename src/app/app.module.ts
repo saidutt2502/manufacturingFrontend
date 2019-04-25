@@ -14,6 +14,8 @@ import {MatNativeDateModule} from '@angular/material';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
+import { NgHttpLoaderModule } from 'ng-http-loader';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +29,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
     HttpModule,
     LayoutsModule,
     MatNativeDateModule,
+    NgHttpLoaderModule.forRoot(),
     ToastrModule.forRoot()
   ],
   providers: [

@@ -4,7 +4,6 @@ import 'rxjs/add/operator/filter';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import PerfectScrollbar from 'perfect-scrollbar';
-
 import { AuthenticationService } from './auth/services/authentication.service';
 import { User } from './auth/users';
 
