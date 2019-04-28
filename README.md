@@ -1,10 +1,10 @@
-# Operations
+# Manufacturing
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.1.
 
 ## Development server
 
-Clone this repo using the command : `git clone https://github.com/amansharma1904/operationsFrontend.git`
+Clone this repo using the command : `git clone https://github.com/amansharma1904/ManufacturingFrontend.git`
 
 Then run `npm install` to install all the packages.
 
@@ -16,7 +16,7 @@ Configure your backend Systems url in the `globals.ts` file
 You will also require the xunify's DB.
 
 
-`git clone https://github.com/amansharma1904/operationsWebservices.git`
+`git clone https://github.com/amansharma1904/ManufacturingWebservices.git`
 
 `git clone `
 
