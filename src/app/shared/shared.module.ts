@@ -8,21 +8,25 @@ import { CheckEqualityPipe } from './pipes/check-equality.pipe';
 import { TypeaheadComponent } from './component/typeahead/typeahead.component';
 import { TrackerComponent } from './component/tracker/tracker.component';
 import { DatePipe } from '@angular/common';
+import { FileUploadModule } from 'ng2-file-upload';
+import { CsvUploadComponent } from './component/csv-upload/csv-upload.component';
 
 @NgModule({
-  declarations: [DatatableComponent, EditModal, ModifyTablePipe, CheckEqualityPipe, TypeaheadComponent, DeleteModal, TrackerComponent],
+  declarations: [DatatableComponent, EditModal, ModifyTablePipe, CheckEqualityPipe, TypeaheadComponent, DeleteModal, TrackerComponent, CsvUploadComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     MaterialExportModule,
+    FileUploadModule,
   ],
   exports : [
     MaterialExportModule,
     DatatableComponent,
     TypeaheadComponent,
     TrackerComponent,
-    CheckEqualityPipe
+    CheckEqualityPipe,
+    CsvUploadComponent
   ],
   entryComponents: [EditModal,DeleteModal],
   providers:[DatePipe]
